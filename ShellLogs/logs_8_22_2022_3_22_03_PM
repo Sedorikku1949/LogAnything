@@ -1,0 +1,28 @@
+[HEADER]
+CWD = /mnt/z/code/NodeJS/LogIt
+THIS_DIR = /mnt/z/code/NodeJS/LogIt/ShellLogs/logs_8_22_2022_3_22_03_PM
+START_TIMESTAMP = 1661174523509
+START_UTC = Mon Aug 22 2022 15:22:03 GMT+0200 (Central European Summer Time)
+OPTIONS = { log: true }
+
+[BODY]
+
+OK hello world ! (15:22)
+OK [Source::LogIt] hello world ! (15:22)
+OK [Source::LogIt] hello world ! (15:22)
+  | Object { hello: true }
+OK [Source::LogIt] hello world ! (15:22)
+  | Array ↵
+  |  | Number 1
+  |  | Number 2
+LOG Client is ready (15:22)
+INFO Client has a ping of 118ms (15:22)
+WARN Emojis was not resolved properly (15:22)
+WARN [Kady::UserCache] Cache is very high (64k users) (15:22)
+ERROR Cannot fetch User with non-snowflake value (15:22)
+ERROR [Discord.js] Cannot fetch User with non-snowflake value (15:22)
+
+PANIC!! [Kady::Bridge] Network Error (15:22)
+DEBUG Error.js -- save error (15:22)
+DEBUG Error.js -- error was saved (15:22)
+  | save at /errors/1.json
