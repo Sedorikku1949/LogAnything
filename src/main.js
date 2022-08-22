@@ -7,7 +7,7 @@ class LogIt {
 	 * @param {object} [options] Options for the module
 	 * @param {number} [options.maxLogsFiles] Default maximum of file logs is 4
 	 * @param {boolean} [options.log] If messages are saved or not in files
-	 * @param {string} [options.logDir]
+	 * @param {string} [options.logDir] The directory of the log files, default is `./ShellLogs`
 	 */
 	constructor(options = {}) {
 		this.options = options;
@@ -74,6 +74,8 @@ class LogIt {
 			this.logFileDir = this.logsDir + path.sep + this.logFileName;
 		}
 		
+		this.logs = true;
+		
 		this.stdoutStream = createWriteStream(this.logFileDir, { flags: "a",  encoding: "utf-8",  autoClose: true });
 		this.stdoutStream.on("error", (err) => console.error(err));
 		this.stdoutStream.write(`[HEADER]\nCWD = ${process.cwd()}\nTHIS_DIR = ${this.logFileDir}\nSTART_TIMESTAMP = ${Date.now()}\nSTART_UTC = ${new Date()}\nOPTIONS = ${inspect(this.options || {}, { colors: false }).replace(/\s*\n\s*/g, "")}\n\n[BODY]\n\n`)
@@ -97,7 +99,7 @@ class LogIt {
 		if (typeof start !== "string" || typeof footer !== "string") throw new Error("Cannot send data");
 		const content = `\x1b[0m${start}${(/\s$/).test(start) ? "" : " "}${resolveDataType && (ignoreStringType ? typeof data !== "string" : true) ? `\x1b[2m${data?.constructor?.name}\x1b[0m ` : ""}${dataColor ? dataColor : ""}${typeof data == "string" ? data : inspect(data, { colors: false }) }${dataColor ? dataColor : ""}${footer}\x1b[0m`;
 		console.log(content);
-		this.stdoutStream.write(`${this.__decolor(content.trim())}\n`)
+		if (this.logs) this.stdoutStream.write(`${this.__decolor(content.trim())}\n`)
 	}
 	/**
 	 * @param {string|array} source
